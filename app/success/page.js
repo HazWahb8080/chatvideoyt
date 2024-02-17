@@ -11,7 +11,7 @@ import {
 } from "firebase/firestore";
 import { useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function SuccessPage() {
   const router = useRouter();
@@ -70,41 +70,35 @@ function SuccessPage() {
   }, [session_id, session]);
   if (!session || !session_id) {
     return (
-      <Suspense>
-        <div
-          className="w-full min-h-screen
+      <div
+        className="w-full min-h-screen
        bg-black text-white items-center  justify-center flex flex-col"
-        >
-          loading ....
-        </div>
-      </Suspense>
+      >
+        loading ....
+      </div>
     );
   }
   if (message === "error" && message !== "") {
     return (
-      <Suspense>
-        <div
-          className="w-full min-h-screen
+      <div
+        className="w-full min-h-screen
        bg-black text-white items-center  justify-center flex flex-col"
-        >
-          <h1> There is an error validating your payment details.</h1>
-        </div>
-      </Suspense>
+      >
+        <h1> There is an error validating your payment details.</h1>
+      </div>
     );
   }
   if (message === "success") {
     return (
-      <Suspense>
-        <div
-          className="w-full min-h-screen
+      <div
+        className="w-full min-h-screen
        bg-black text-white items-center  justify-center flex flex-col"
-        >
-          <h1 className="text-2xl">
-            Thanks for your purchase!,{session?.user?.name}!
-          </h1>
-          <p>redirecting now ...</p>
-        </div>
-      </Suspense>
+      >
+        <h1 className="text-2xl">
+          Thanks for your purchase!,{session?.user?.name}!
+        </h1>
+        <p>redirecting now ...</p>
+      </div>
     );
   }
 }
